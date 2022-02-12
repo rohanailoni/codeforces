@@ -72,6 +72,20 @@ public class Solution{
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
                 // write code here
+				int n=in.nextInt();
+				long res=0;
+				int[] arr=string_to_array(in.nextLine().split(" "));
+				for(int i=0;i<n;i++){
+					long no=0,temp=0;
+					for(int j=i;j<n;j++){
+						if(arr[j]==0)no++;
+						temp+=(j-i+1);
+						temp+=no;
+					}
+					res+=temp;
+				}
+				out.println(res);
+				
             }
             for(String s:answer){
 				out.println(s);
