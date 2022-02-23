@@ -74,28 +74,28 @@ public class Solution{
             int testCases=in.nextInt();
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
-                // write code here
-				int[][] arr=new int[3][2];
-				for(int i=0;i<3;i++){	
-					int[] temp=string_to_array(in.nextLine().split(" "));
-					arr[i]=temp;
-				}
-				int a,b,c;
-				double ans=0;
-				if(arr[0][1]==arr[1][1]){
-					if(arr[1][1]>arr[2][1]){
-						ans+=Math.abs(arr[1][0]-arr[0][0]);
-					}
-				}if(arr[1][1]==arr[2][1]){
-					if(arr[2][1]>arr[0][1]){
-						ans+=Math.abs(arr[2][0]-arr[1][0]);
-					}
-				}if(arr[2][1]==arr[0][1]){
-					if(arr[0][1]>arr[1][1]){
-						ans+=Math.abs(arr[2][0]-arr[0][0]);
-					}
-				}
-				out.println(ans);
+               int n=Integer.parseInt(in.nextLine());
+			   int[] arr=string_to_array(in.nextLine().split(" "));
+			   HashMap<Integer,Integer>map=new HashMap<>();
+			   int max=0;
+			   for(int i=0;i<n;i++){
+				   map.put(arr[i],map.getOrDefault(arr[i], 0)+1);
+				   if(map.get(arr[i])>max){
+					   max=map.get(arr[i]);
+				   }
+			   }
+			   int min=map.size();
+			   for(int i=1;i<=n;i++){
+				   if(i<=min){
+					   out.print(min+" ");
+				   }else{
+					   min++;
+					   out.print(min+" ");
+				   }
+			   }
+			   out.print("\n");
+			
+
             }
             for(String s:answer){
 				out.println(s);
@@ -107,4 +107,5 @@ public class Solution{
         }
     }
 }
+
 
