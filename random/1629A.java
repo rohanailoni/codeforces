@@ -80,7 +80,7 @@ public class Solution{
 				for(int i=0;i<n;i++){
 					put.add(new obj(a[i], b[i]));
 				}
-				Collections.sort(put,new Sorting());
+				Collections.sort(put,(obj o1,obj o2)->o1.want-o2.want);
 				for(obj j:put){
 					if(j.want<=k){
 						k+=j.gives;

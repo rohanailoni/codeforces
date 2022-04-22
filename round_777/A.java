@@ -71,78 +71,31 @@ public class Solution{
             int testCases=in.nextInt();
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
-                // write code here
-				int a=in.nextInt();
-				int s=in.nextInt();
-				String a_ss=Integer.toString(a);
-				String s_ss=Integer.toString(s);
-				
-				int i=a_ss.length()-1;
-				int j=s_ss.length()-1;
-	
-
-
-				if(i-j>0){
-					for(int k=0;k<i-j;k++){
-						s_ss="0"+s_ss;						
-					}
-				}else{
-					for(int k=0;k<j-i;k++){
-						a_ss="0"+a_ss;
-					}
+				int n=Integer.parseInt(in.nextLine());
+				String ans = "";
+			if(n%3==1){
+				ans+="1";
+				n--;
+			}
+			while(n>0){
+				if(n >= 2){
+					ans += "2";
+					n-=2;
 				}
-				i=a_ss.length();
-				j=s_ss.length();
-				out.println(a_ss+" "+s_ss+" "+i+" "+j);
-				String ans="";
-				while(i>=0 && j>=0){
-					if(Integer.parseInt(a_ss.substring(i,i+1))>=Integer.parseInt(s_ss.substring(j,j+1))){
-						j--;
-						int n=Integer.parseInt(s_ss.substring(j,j+2))-Integer.parseInt(a_ss.substring(i,i+1));
-						if(n<10){
-							ans+=Integer.toString(n);
-						}else{
-							break;
-						}
-					    out.println(ans+" "+n);
-						i--;
-						j--;
-
-					}else{
-						int n=Integer.parseInt(s_ss.substring(j,j+1))-Integer.parseInt(a_ss.substring(i,i+1));
-						ans+=Integer.toString(n);
-						i--;
-						j--;
-
-
-					out.println(ans+" "+n);
-					}
+				if(n >= 1){
+					ans += "1";
+					n--;
 				}
-				//out.println(i+" "+j);
-				if(i!=-1 || j!=-1){
-					out.println(-1);
-					continue;
-				}
-				char[] s1=ans.toCharArray();
-				i=0;
-				j=ans.length()-1;
-				while(i<j){
-					char temp=s1[j];
-					s1[j]=s1[i];
-					s1[i]=temp;
-					i++;
-					j--;
+			}
+			System.out.println(ans);
+			}
 
-				}
-				out.println(Integer.parseInt(String.valueOf(s1)));
-            }
             for(String s:answer){
 				out.println(s);
             }
             out.close();
         } catch (Exception e) {
-            System.out.println(e);
-			return;
+            return;
         }
     }
 }

@@ -69,80 +69,60 @@ public class Solution{
             FastReader in=new FastReader();
             FastWriter out = new FastWriter();
             int testCases=in.nextInt();
-            List<String>answer=new ArrayList<>();
+            
             while(testCases-- > 0){
-                // write code here
-				int a=in.nextInt();
-				int s=in.nextInt();
-				String a_ss=Integer.toString(a);
-				String s_ss=Integer.toString(s);
-				
-				int i=a_ss.length()-1;
-				int j=s_ss.length()-1;
-	
+               
+				HashMap<Character,Integer>map=new HashMap<>();
+				String s=in.nextLine();
+				boolean isgo=false;
+				for(int i=0;i<s.length();i++){
+					char temp=s.charAt(i);
+					if(temp=='r'){
+						map.put('r',map.getOrDefault('r', 0)+1);
+					}else if(temp=='g'){
+
+						map.put('g',map.getOrDefault('g', 0)+1);
+					}else if(temp=='b'){
+						map.put('b',map.getOrDefault('b', 0)+1);
 
 
-				if(i-j>0){
-					for(int k=0;k<i-j;k++){
-						s_ss="0"+s_ss;						
-					}
-				}else{
-					for(int k=0;k<j-i;k++){
-						a_ss="0"+a_ss;
-					}
-				}
-				i=a_ss.length();
-				j=s_ss.length();
-				out.println(a_ss+" "+s_ss+" "+i+" "+j);
-				String ans="";
-				while(i>=0 && j>=0){
-					if(Integer.parseInt(a_ss.substring(i,i+1))>=Integer.parseInt(s_ss.substring(j,j+1))){
-						j--;
-						int n=Integer.parseInt(s_ss.substring(j,j+2))-Integer.parseInt(a_ss.substring(i,i+1));
-						if(n<10){
-							ans+=Integer.toString(n);
+					}else if(temp=='R'){
+						if(map.containsKey('r')&& map.get('r')==1){
+							isgo=true;
 						}else{
+							isgo=false;
 							break;
 						}
-					    out.println(ans+" "+n);
-						i--;
-						j--;
-
-					}else{
-						int n=Integer.parseInt(s_ss.substring(j,j+1))-Integer.parseInt(a_ss.substring(i,i+1));
-						ans+=Integer.toString(n);
-						i--;
-						j--;
-
-
-					out.println(ans+" "+n);
+					}else if(temp=='G'){
+						if(map.containsKey('g')&& map.get('g')==1){
+							isgo=true;
+						}else{
+							isgo=false;
+							break;
+						}
+					}else if(temp=='B'){
+						if(map.containsKey('b') && map.get('b')==1){
+							isgo=true;
+						}else{
+							isgo=false;
+							break;
+						}
 					}
+                    //out.println(map.containsKey('r'));
 				}
-				//out.println(i+" "+j);
-				if(i!=-1 || j!=-1){
-					out.println(-1);
-					continue;
+                //out.print(isgo);
+				if(isgo){
+					out.println("YES");
+				}else{
+					out.println("NO");
 				}
-				char[] s1=ans.toCharArray();
-				i=0;
-				j=ans.length()-1;
-				while(i<j){
-					char temp=s1[j];
-					s1[j]=s1[i];
-					s1[i]=temp;
-					i++;
-					j--;
-
-				}
-				out.println(Integer.parseInt(String.valueOf(s1)));
             }
-            for(String s:answer){
-				out.println(s);
-            }
+            
             out.close();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.print(e);
 			return;
+
         }
     }
 }

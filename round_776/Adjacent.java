@@ -81,6 +81,10 @@ public class Solution{
 						out.println("NO");
 					}
 				}else{
+					pq.peek();
+					for(int i=0;i<n;i++){
+						:
+					}
 					int n=s.length();
 					boolean boo=false;
 					for(int i=0;i<n;i++){

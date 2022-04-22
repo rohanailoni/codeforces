@@ -57,13 +57,14 @@ public class Solution{
 			bw.close();
 		}
 	}
-    int[] string_to_array(String[] arr){
+    static int[] string_to_array(String[] arr){
         int[] ans=new int[arr.length];
         for(int i=0;i<arr.length;i++){
             ans[i]=Integer.parseInt(arr[i]);
         }
         return ans;
     }
+	
     public static void main(String[] args) {
         try {
             FastReader in=new FastReader();
@@ -71,10 +72,11 @@ public class Solution{
             int testCases=in.nextInt();
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
-                // write code here
-            }
+				int n=Integer.parseInt(in.nextLine());
+				int[] arr=string_to_array(in.nextLine().split(" "));
+					
+			}
             for(String s:answer){
-                i++;
 				out.println(s);
             }
             out.close();

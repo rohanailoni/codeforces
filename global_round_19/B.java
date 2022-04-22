@@ -92,7 +92,7 @@ public class Solution{
 				}else{
 					int k=1;
 					while(k<n-1 && p[k]==1)k++;
-					//out.println(k);
+					out.println(k);
 					if(k==n-1){
 						out.println(-1);
 					}else{

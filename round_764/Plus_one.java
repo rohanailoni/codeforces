@@ -79,6 +79,7 @@ public class Solution{
 				int min=Collections.max(Arrays.asList(arr1));
 				int max=Collections.min(Arrays.asList(arr1));
 				answer.add(Integer.toString(min-max));
+
             }
             for(String s:answer){
 				out.println(s);

@@ -64,6 +64,10 @@ public class Solution{
         }
         return ans;
     }
+	public static double distance(int x1,int x2){
+		return Math.sqrt(x1*x1+x2*x2);
+	}
+	
     public static void main(String[] args) {
         try {
             FastReader in=new FastReader();
@@ -71,78 +75,37 @@ public class Solution{
             int testCases=in.nextInt();
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
-                // write code here
-				int a=in.nextInt();
-				int s=in.nextInt();
-				String a_ss=Integer.toString(a);
-				String s_ss=Integer.toString(s);
-				
-				int i=a_ss.length()-1;
-				int j=s_ss.length()-1;
-	
+				int n=Integer.parseInt(in.nextLine());
+				String s=in.nextLine();
+				int oper=0;
+				int poin=0;
+				//out.println(palind("()"));	
+				String temp="";
+				for(int i=0;i<n;i++){
+					temp+=s.charAt(i);
+					int temp_len=temp.length();
+					if(temp.equals("()") || temp.equals("((") || temp.equals("))")){
+						poin+=2;
+						oper+=1;
+						temp="";
 
-
-				if(i-j>0){
-					for(int k=0;k<i-j;k++){
-						s_ss="0"+s_ss;						
 					}
-				}else{
-					for(int k=0;k<j-i;k++){
-						a_ss="0"+a_ss;
-					}
-				}
-				i=a_ss.length();
-				j=s_ss.length();
-				out.println(a_ss+" "+s_ss+" "+i+" "+j);
-				String ans="";
-				while(i>=0 && j>=0){
-					if(Integer.parseInt(a_ss.substring(i,i+1))>=Integer.parseInt(s_ss.substring(j,j+1))){
-						j--;
-						int n=Integer.parseInt(s_ss.substring(j,j+2))-Integer.parseInt(a_ss.substring(i,i+1));
-						if(n<10){
-							ans+=Integer.toString(n);
-						}else{
-							break;
+					else if(temp_len>1){
+						if(s.charAt(i)==')'){
+							poin+=temp_len;
+							oper+=1;
+							temp="";
 						}
-					    out.println(ans+" "+n);
-						i--;
-						j--;
-
-					}else{
-						int n=Integer.parseInt(s_ss.substring(j,j+1))-Integer.parseInt(a_ss.substring(i,i+1));
-						ans+=Integer.toString(n);
-						i--;
-						j--;
-
-
-					out.println(ans+" "+n);
 					}
 				}
-				//out.println(i+" "+j);
-				if(i!=-1 || j!=-1){
-					out.println(-1);
-					continue;
-				}
-				char[] s1=ans.toCharArray();
-				i=0;
-				j=ans.length()-1;
-				while(i<j){
-					char temp=s1[j];
-					s1[j]=s1[i];
-					s1[i]=temp;
-					i++;
-					j--;
-
-				}
-				out.println(Integer.parseInt(String.valueOf(s1)));
+				out.println(oper+" "+(n-poin));
             }
             for(String s:answer){
 				out.println(s);
             }
             out.close();
         } catch (Exception e) {
-            System.out.println(e);
-			return;
+            return;
         }
     }
 }
