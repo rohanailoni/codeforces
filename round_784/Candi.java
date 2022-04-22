@@ -73,42 +73,46 @@ public class Solution{
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
 				int n=Integer.parseInt(in.nextLine());
-				String[] arr=new String[n];
-				for(int i=0;i<n;i++){
-					arr[i]=in.nextLine();
+				int[] arr=string_to_array(in.nextLine().split(" "));
+				int[] up=new int[n];
+				int[] down=new int[n];
+				up[0]=arr[0];
+				for(int i=1;i<n;i++){
+					up[i]=arr[i]+up[i-1];
 				}
-				long ans=0;
-				HashMap<String,Integer>map=new HashMap<>();
-				for(int i=0;i<n;i++){
-					map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+				down[n-1]=arr[n-1];
+				for(int i=n-2;i>=0;i--){
+					down[i]=down[i+1]+arr[i];
 				}
-				for(int i=0;i<n;i++){
-					char c=arr[i].charAt(0);
-					for(int j=c-'a'+1;j<26;j++){
-						char jj=(char)(j+'a');
-						String cc=jj+Character.toString(arr[i].charAt(1));
-						if(map.containsKey(cc)){
-							ans+=map.get(cc);
-						}
+				//System.out.println(Arrays.toString(up));
+				//System.out.println(Arrays.toString(down));
+				int i=0;
+				int j=n-1;
+				int ans=0;
+				while(i<j){
+					if(up[i]==down[j]){
+						ans=(n-j)+(i+1);
+						i++;
+						j--;
+						//out.println(i+" "+j);
+
 					}
-					c=arr[i].charAt(1);
-					for(int j=c-'a'+1;j<26;j++){
-						char jj=(char)(j+'a');
-						String cc=Character.toString(arr[i].charAt(0))+jj;
-						if(map.containsKey(cc)){
-							ans+=map.get(cc);
-						}
+					if(up[i]>down[j]){
+						j--;
+					}else if(up[i]<down[j]){
+						i++;
 					}
-					//break;
+					//out.println(i+" "+j);
 				}
 				out.println(ans);
-					
 			}
+            for(String s:answer){
+				out.println(s);
+            }
             out.close();
         } catch (Exception e) {
-           System.out.println(e); 
-			return;
-
+			System.out.println(e);
+            return;
         }
     }
 }
