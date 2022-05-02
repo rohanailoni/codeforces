@@ -70,28 +70,26 @@ public class Solution{
             FastReader in=new FastReader();
             FastWriter out = new FastWriter();
             int testCases=in.nextInt();
-            while(testCases-- > 0){
-				HashSet<Character>set=new HashSet<>();
-				char[] arr=in.nextLine().toCharArray();
-				for(int i=0;i<arr.length;i++){
-					set.add(arr[i]);
-					
-				}
-				int lot=set.size();
-				boolean check=false;
-				for(int i=lot;i<arr.length;i++){
-					if(arr[i-lot]!=arr[i]){
-						check=true;
-						break;
+            List<String>answer=new ArrayList<>();
+			HashMap<String,Integer>map=new HashMap<>();
+			int count=1;
+			for(char ch='a';ch<='z';ch++){
+				for(char d='a';d<='z';d++){
+					if(ch!=d){
+						String temp="";
+						temp=temp+ch+d;
+						map.put(temp,count);
+						count++;
 					}
 				}
-				if(check){
-					out.println("NO");
-				}else{
-					out.println("YES");
-				}
-
 			}
+            while(testCases-- > 0){
+				String s=in.nextLine();
+				out.println(map.get(s));
+			}
+            for(String s:answer){
+				out.println(s);
+            }
             out.close();
         } catch (Exception e) {
             return;

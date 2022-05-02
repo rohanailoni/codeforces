@@ -70,32 +70,47 @@ public class Solution{
             FastReader in=new FastReader();
             FastWriter out = new FastWriter();
             int testCases=in.nextInt();
+            List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
-				HashSet<Character>set=new HashSet<>();
-				char[] arr=in.nextLine().toCharArray();
-				for(int i=0;i<arr.length;i++){
-					set.add(arr[i]);
-					
+				int n=Integer.parseInt(in.nextLine());
+				String[] arr=new String[n];
+				for(int i=0;i<n;i++){
+					arr[i]=in.nextLine();
 				}
-				int lot=set.size();
-				boolean check=false;
-				for(int i=lot;i<arr.length;i++){
-					if(arr[i-lot]!=arr[i]){
-						check=true;
-						break;
+				long ans=0;
+				HashMap<String,Integer>map=new HashMap<>();
+				for(int i=0;i<n;i++){
+					map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+				}
+				for(int i=0;i<n;i++){
+					char c=arr[i].charAt(0);
+					for(int j=c-'a'+1;j<26;j++){
+						char jj=(char)(j+'a');
+						String cc=jj+Character.toString(arr[i].charAt(1));
+						if(map.containsKey(cc)){
+							ans+=map.get(cc);
+						}
 					}
+					c=arr[i].charAt(1);
+					for(int j=c-'a'+1;j<26;j++){
+						char jj=(char)(j+'a');
+						String cc=Character.toString(arr[i].charAt(0))+jj;
+						if(map.containsKey(cc)){
+							ans+=map.get(cc);
+						}
+					}
+					//break;
 				}
-				if(check){
-					out.println("NO");
-				}else{
-					out.println("YES");
-				}
-
+				out.println(ans);
+					
 			}
             out.close();
         } catch (Exception e) {
-            return;
+           System.out.println(e); 
+			return;
+
         }
     }
 }
+
 

@@ -64,34 +64,41 @@ public class Solution{
         }
         return ans;
     }
-	
+	static int count(String s){
+		int count=0;
+		for(int i=0;i<s.length();i++){
+			if(s.charAt(i)=='a'){
+				count++;
+			}
+		}
+		return count;
+	}	
     public static void main(String[] args) {
         try {
             FastReader in=new FastReader();
             FastWriter out = new FastWriter();
             int testCases=in.nextInt();
+            List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
-				HashSet<Character>set=new HashSet<>();
-				char[] arr=in.nextLine().toCharArray();
-				for(int i=0;i<arr.length;i++){
-					set.add(arr[i]);
-					
-				}
-				int lot=set.size();
-				boolean check=false;
-				for(int i=lot;i<arr.length;i++){
-					if(arr[i-lot]!=arr[i]){
-						check=true;
-						break;
+				String a=in.nextLine();
+				String b=in.nextLine();
+				int a_n=a.length();
+				int b_n=b.length();
+				if(b_n==1 && count(b)==1){
+					out.println("1");	
+				}else{
+				
+					if(count(b)>1 || (count(b)==1 && b_n>1)){
+						out.println("-1");
+					}else{
+						long n=(long)Math.pow(2, a_n);
+						out.println(n);	
 					}
 				}
-				if(check){
-					out.println("NO");
-				}else{
-					out.println("YES");
-				}
-
 			}
+            for(String s:answer){
+				out.println(s);
+            }
             out.close();
         } catch (Exception e) {
             return;

@@ -70,28 +70,36 @@ public class Solution{
             FastReader in=new FastReader();
             FastWriter out = new FastWriter();
             int testCases=in.nextInt();
+            List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
-				HashSet<Character>set=new HashSet<>();
-				char[] arr=in.nextLine().toCharArray();
-				for(int i=0;i<arr.length;i++){
-					set.add(arr[i]);
-					
-				}
-				int lot=set.size();
-				boolean check=false;
-				for(int i=lot;i<arr.length;i++){
-					if(arr[i-lot]!=arr[i]){
-						check=true;
-						break;
+				int[] arr=string_to_array(in.nextLine().split(" "));
+				if(arr[1]%arr[0]==0){
+					int rem=arr[1]/arr[0];
+					boolean ans=false;
+					for(int i=1;i<=rem;i++){
+						for(int j=1;j<=rem;j++){
+                            //out.println(Math.pow(i,j)+" "+rem);
+							if(Math.pow(i,j)==rem){
+								out.println(j+" "+i);
+								ans=true;
+								break;
+							}
+						}
+						if(ans){
+							break;
+						}
 					}
-				}
-				if(check){
-					out.println("NO");
-				}else{
-					out.println("YES");
-				}
+					if(!ans){
+                        out.println("0 0");
+                    }
 
+				}else{
+					out.println("0 0");
+				}	
 			}
+            for(String s:answer){
+				out.println(s);
+            }
             out.close();
         } catch (Exception e) {
             return;
