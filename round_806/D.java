@@ -186,7 +186,7 @@ class Trie{
 	boolean check(String s,int start,int mid,int end){
 		TrieNode p=root;
 		int i;
-		boolean first=false,second=false;;
+		boolean first=false,second=false;
 		for(i=start;i<mid;i++){
 			int index=s.charAt(i)-'a';
 			if(p.children[index]!=null){
