@@ -14,11 +14,9 @@ for _ in range(test):
         a,k,x=input().split(" ")
         k=int(k)
         if int(a)==1:
-            s+=int(k)*x
             for i in x:
                 s_dp[ord(i)-ord("a")]+=k
         if int(a)==2:
-            t+=int(k)*x
             for i in x:
                 t_dp[ord(i)-ord("a")]+=k
         s_str=""
