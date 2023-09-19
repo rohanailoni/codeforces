@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
 )
 
 var scanner *bufio.Scanner
@@ -37,19 +36,31 @@ func readInts(n int) []int {
 	}
 	return arr
 }
-
+func solve(s [][]int, n int) int {
+	ans := 0
+	for i := 0; i < n; i++ {
+		for j := 0; j < n; j++ {
+			if i != j {
+				if s[i][0] == s[j][1] {
+					ans++
+				}
+			}
+		}
+	}
+	return ans
+}
 func main() {
-	testCases := readInt()
-	for t := 0; t < testCases; t++ {
+	//testCases := readInt()
+	ans := make([]int, 0)
+	for t := 0; t < 1; t++ {
 		n := readInt()
-		arr := readInts(n)
-
-		// my logic goes herefor each test case goes here
-		// For example:
-		// answer := yourFunction(arr)
-
-		// Output the answer for each test case
-		// fmt.Println(answer)
+		teams := make([][]int, 0)
+		for i := 0; i < n; i++ {
+			teams = append(teams, readInts(2))
+		}
+		ans = append(ans, solve(teams, n))
+	}
+	for _, val := range ans {
+		fmt.Println(val)
 	}
 }
-
