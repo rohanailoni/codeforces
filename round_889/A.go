@@ -52,7 +52,7 @@ func main() {
 			}
 		}
 		//fmt.Println(main)
-		for mover := 0; mover < n && main < n; mover++ {
+		for mover := main + 1; mover < n && main < n; mover++ {
 			if arr[mover] == (mover + 1) {
 
 				if main != mover {
