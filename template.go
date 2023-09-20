@@ -2,10 +2,8 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"strconv"
-	"strings"
 )
 
 var scanner *bufio.Scanner
@@ -37,6 +35,18 @@ func readInts(n int) []int {
 	}
 	return arr
 }
+func readIntsUnknown() []int {
+	var arr []int
+	arr = make([]int, 0)
+	for {
+		num := readInt()
+		if num == -1 {
+			break
+		}
+		arr = append(arr, num)
+	}
+	return arr
+}
 
 func main() {
 	testCases := readInt()
@@ -52,4 +62,3 @@ func main() {
 		// fmt.Println(answer)
 	}
 }
-
