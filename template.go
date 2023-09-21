@@ -47,7 +47,44 @@ func readIntsUnknown() []int {
 	}
 	return arr
 }
+func findMin(arr []int) int {
+	if len(arr) == 0 {
 
+		return 0
+	}
+
+	min := arr[0]
+
+	for i := 1; i < len(arr); i++ {
+		if arr[i] < min {
+			min = arr[i]
+		}
+	}
+
+	return min
+}
+func findMax(arr []int) int {
+	if len(arr) == 0 {
+
+		return 0
+	}
+
+	max := arr[0]
+
+	for i := 1; i < len(arr); i++ {
+		if arr[i] > max {
+			max = arr[i]
+		}
+	}
+
+	return max
+}
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
 func main() {
 	testCases := readInt()
 	for t := 0; t < testCases; t++ {
