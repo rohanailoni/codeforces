@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
 )
 
 var scanner *bufio.Scanner
@@ -87,24 +86,71 @@ func max(a, b int) int {
 	}
 	return b
 }
-func printArrayWithSpaces(arr []int) {
-	// Convert the array to a string with spaces
-	arrayString := strings.Trim(strings.Join(strings.Fields(fmt.Sprint(arr)), " "), "[]")
+func solve(coordinates [][]int) bool {
+	n := len(coordinates)
+	ispositiveAndNegativeX := false
+	ispositiveAndNegativeY := false
+	var isposX string
 
-	// Print the formatted string
-	fmt.Println(arrayString)
+	if coordinates[0][0] >= 0 {
+		isposX = "P"
+	} else {
+		isposX = "N"
+	}
+
+	for i := 1; i < n; i++ {
+		if isposX == "P" && coordinates[i][0] < 0 {
+			isposX = "N"
+			ispositiveAndNegativeX = true
+			break
+		}
+		if isposX == "N" && coordinates[i][0] >= 0 {
+			isposX = "P"
+			ispositiveAndNegativeX = true
+			break
+		}
+
+	}
+	if !ispositiveAndNegativeX {
+		return true
+	}
+	var isPosY string
+	if coordinates[0][1] >= 0 {
+		isPosY = "P"
+	} else {
+		isPosY = "N"
+	}
+	for i := 1; i < n; i++ {
+		if isPosY == "P" && coordinates[i][1] < 0 {
+			isPosY = "N"
+			ispositiveAndNegativeY = true
+			break
+		}
+		if isPosY == "N" && coordinates[i][1] >= 0 {
+			isPosY = "P"
+			ispositiveAndNegativeY = true
+			break
+		}
+	}
+	if ispositiveAndNegativeY && ispositiveAndNegativeX {
+		return false
+	}
+	return true
+
 }
 func main() {
 	testCases := readInt()
 	for t := 0; t < testCases; t++ {
 		n := readInt()
-		arr := readInts(n)
+		var coordinates [][]int
+		for i := 0; i < n; i++ {
+			coordinates = append(coordinates, readInts(2))
+		}
+		if solve(coordinates) {
+			fmt.Println("Yes")
+		} else {
+			fmt.Println("No")
+		}
 
-		// my logic goes herefor each test case goes here
-		// For example:
-		// answer := yourFunction(arr)
-
-		// Output the answer for each test case
-		// fmt.Println(answer)
 	}
 }

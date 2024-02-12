@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -87,24 +88,70 @@ func max(a, b int) int {
 	}
 	return b
 }
-func printArrayWithSpaces(arr []int) {
-	// Convert the array to a string with spaces
-	arrayString := strings.Trim(strings.Join(strings.Fields(fmt.Sprint(arr)), " "), "[]")
+func solve(n, k int) []int {
+	ans := make([]int, n)
+	for i := 0; i < n; i++ {
+		ans[i] = 0
+	}
+	numPointer := 1
 
-	// Print the formatted string
+	for i := 0; i < k; i++ {
+		j := i
+		for {
+			if (j) >= n {
+				//fmt.Println(j + k)
+				break
+			}
+			ans[j] = numPointer
+			j = j + k
+			numPointer++
+
+		}
+	}
+	return ans
+}
+func printArrayWithSpaces(arr []int) {
+	arrayString := strings.Trim(strings.Join(strings.Fields(fmt.Sprint(arr)), " "), "[]")
 	fmt.Println(arrayString)
+}
+func check(arr []int, n, k int) bool {
+	diff := make([]int, n-k+1)
+	// min := findMin(arr)
+	// max := findMax(arr)
+	// if max-min <= 1 {
+	// 	return true
+	// }
+	// return false
+	for i := 0; i < n-k+1; i++ {
+		sum := 0
+		high := i + k
+		for j := i; j < high; j++ {
+			sum += arr[j]
+			fmt.Print(arr[j], " ")
+		}
+		fmt.Println("")
+		diff[i] = sum
+	}
+	fmt.Println(diff)
+	for i := 0; i < len(diff); i++ {
+		for j := i + 1; j < len(diff); j++ {
+			if math.Abs(float64(diff[i]-diff[j])) > 1 {
+				return false
+			}
+		}
+	}
+	return true
 }
 func main() {
 	testCases := readInt()
 	for t := 0; t < testCases; t++ {
-		n := readInt()
-		arr := readInts(n)
+		//n := readInt()
+		arr := readInts(2)
+		n := arr[0]
+		k := arr[1]
+		ans := solve(n, k)
+		fmt.Println(check(ans, n, k), ans)
+		//printArrayWithSpaces(ans)
 
-		// my logic goes herefor each test case goes here
-		// For example:
-		// answer := yourFunction(arr)
-
-		// Output the answer for each test case
-		// fmt.Println(answer)
 	}
 }
