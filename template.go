@@ -94,6 +94,13 @@ func printArrayWithSpaces(arr []int) {
 	// Print the formatted string
 	fmt.Println(arrayString)
 }
+func sum(arr []int) int {
+	ans := 0
+	for i := 0; i < len(arr); i++ {
+		ans += arr[i]
+	}
+	return ans
+}
 func main() {
 	testCases := readInt()
 	for t := 0; t < testCases; t++ {
